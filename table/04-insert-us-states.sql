@@ -1,4 +1,4 @@
-INSERT INTO us_state VALUES (code, postal)
+INSERT INTO us_states (postal, name) VALUES 
 ('AK', 'Alaska'),
 ('AL', 'Alabama'),
 ('AZ', 'Arizona'),
