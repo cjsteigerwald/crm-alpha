@@ -25,7 +25,7 @@ CREATE TABLE locations (
   dependent_locality VARCHAR(200), -- department
   postal_code CHAR(10) NOT NULL,
   thoroughfare VARCHAR(100) NOT NULL, -- street address
-  premise VARCHAR(50), -- apartment, suite, box number, etc, PO Box
+  premise VARCHAR(50) DEFAULT '' NOT NULL, -- apartment, suite, box number, etc, PO Box
   sub_premise VARCHAR(50),
-  PRIMARY KEY (thoroughfare, postal_code)
+  PRIMARY KEY (thoroughfare, postal_code, premise)
 );
