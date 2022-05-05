@@ -19,6 +19,7 @@
 
 CREATE TABLE locations (
   id SERIAL,
+  country_id INT REFERENCES countries(id),
   administrative_area INT REFERENCES us_states(id) NOT NULL, -- state
   sub_administrative_area VARCHAR(100), -- county
   locality INT REFERENCES cities(id) NOT NULL, -- city/town
