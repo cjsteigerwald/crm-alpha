@@ -1,0 +1,43 @@
+-- INSERT INTO locations (
+--     country_id,
+--     administrative_area, 
+--     locality,
+--     postal_code,
+--     thoroughfare,
+--     premise
+--      ) VALUES (
+--          236,
+--          29,
+--          1,
+--          '895096114',
+--          '6630 S McCarran Blvd',
+--          'a12'
+--      );
+
+-- INSERT INTO locations (
+--     country_id,
+--     administrative_area, 
+--     locality,
+--     postal_code,
+--     thoroughfare
+--      ) VALUES (
+--          236,
+--          29,
+--          1,
+--          '89511',
+--          '655 Sierra Rose Dr'
+--      );
+
+-- INSERT INTO locations (
+--     country_id,
+--     administrative_area, 
+--     locality,
+--     postal_code,
+--     thoroughfare
+--      ) VALUES (
+--          236,
+--          29,
+--          1,
+--          '89521',
+--          '10100 Toltec Ct'
+--      );
