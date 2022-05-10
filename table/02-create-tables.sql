@@ -5,6 +5,7 @@
 --   three_char_code CHAR(3) NOT NULL UNIQUE
 -- )
 
+
 -- CREATE TABLE us_states (
 --   id SERIAL PRIMARY KEY,
 --   postal CHAR(2) NOT NULL UNIQUE,
@@ -30,6 +31,27 @@
 --   sub_premise VARCHAR(50),
 --   UNIQUE (thoroughfare, postal_code, premise)
 -- );
+
+-- CREATE TABLE emails (
+--   id SERIAL PRIMARY KEY,
+--   extension VARCHAR (25),
+--   domain_name VARCHAR (100),
+--   user_name VARCHAR (200),
+--   UNIQUE (user_name, domain_name, extension)
+-- );
+
+-- CREATE TYPE phone_type AS ENUM ('home', 'cell', 'business', 'fax');
+
+-- CREATE TABLE phones (
+--   id SERIAL PRIMARY KEY,
+--   country_code CHAR (1),
+--   area_code CHAR (3),
+--   phone_number CHAR (7),
+--   phone_type phone_type,
+--   UNIQUE (country_code, area_code, phone_number)
+-- );
+
+
 
 -- CREATE TYPE sex_status AS ENUM ('male', 'female', 'indeterminate', 'unknown');
 
