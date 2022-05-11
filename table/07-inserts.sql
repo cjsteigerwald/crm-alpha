@@ -1,28 +1,30 @@
-BEGIN TRANSACTION;
-DECLARE _email_id INT;
-DECLARE _phone_id INT;
+-- https://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
 
-INSERT INTO emails (user_name, domain_name, extension)
-VALUES ('test', 'testing', 'com');
-
-SET _email_id = SCOPE_IDENTITY();
-
-INSERT INTO phones (country_code, area_code, phone_number, phone_type)
-VALUES ('1', '123', '456', '7890', 'home');
-
-SET _phone_id = SCOPE_IDENTITY();
-
-INSERT INTO persons (first_name, last_name, location, phone_home, email_personal)
-VALUES (
-  'chris',
-  'steigerwald',
-  1,
-  @phone_id,
-  @email_id
-)
-COMMIT TRANSACTION;
-
-WITH new_person A(
+WITH new_person (
   user_name, domain_name, extension,
-  country_code, area_code, phone_number, phone_type
-);
+  country_code, area_code, phone_number, phone_type,
+  first_name, last_name
+) AS (
+  VALUES (
+    'cmkreins', 'liveit', 'com',
+    '1', '775', '8943', 'home',
+    'christine', 'steigerwald'
+  )
+),
+ins1 AS (
+  INSERT INTO phones (country_code, area_code, phone_number)
+  SELECT country_code, area_code, phone_number
+  FROM new_person
+  RETURNING id AS phone_id
+),
+ins2 AS (
+  INSERT INTO emails (user_name, domain_name, extension)
+  SELECT user_name, domain_name, extension
+  FROM new_person
+  -- RETURNING id AS email_id
+  RETURNING id AS email_id
+)
+
+INSERT INTO persons (first_name, last_name, phone_home, email_personal)
+SELECT new_person.first_name, new_person.last_name, ins1.phone_id, ins2.email_id
+FROM new_person, ins1, ins2;
