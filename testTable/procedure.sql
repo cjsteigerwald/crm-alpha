@@ -1,7 +1,8 @@
 create or replace procedure transfer(
-   sender int,
-   receiver int, 
-   amount dec
+    id INOUT INT,
+    sender int,
+    receiver int, 
+    amount dec
 )
 language plpgsql    
 as $$
@@ -17,4 +18,5 @@ begin
     where id = receiver;
 
     commit;
-end;$$;
+end
+$$;

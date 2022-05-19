@@ -1,0 +1,1 @@
+CALL UpdateClothes(1, 'T-Shirt', 'New York', 'Red', 1500);

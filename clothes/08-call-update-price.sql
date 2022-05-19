@@ -1,0 +1,1 @@
+CALL updatePrice(2, 3535);
