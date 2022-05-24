@@ -4,8 +4,8 @@ CREATE TABLE persons (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(200) NOT NULL,
   last_name VARCHAR(200) NOT NULL,
-  middle_name VARCHAR(200),
-  suffix_name VARCHAR(200),
+  middle_name VARCHAR(200) NOT NULL DEFAULT '',
+  suffix_name VARCHAR(200) NOT NULL,
   sex sex_status,
   location_home INT REFERENCES locations (id),
   phone_home INT REFERENCES phones (id),
@@ -15,5 +15,5 @@ CREATE TABLE persons (
   email_professional INT REFERENCES emails (id),
   photo_path VARCHAR(400),
   date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 );

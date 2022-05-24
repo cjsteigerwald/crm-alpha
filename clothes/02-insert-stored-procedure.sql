@@ -1,22 +1,22 @@
-CREATE OR REPLACE PROCEDURE AddClothes (
-  c_id INOUT INT,
-  c_name VARCHAR(100),
-  c_city VARCHAR(100),
-  c_color VARCHAR(100),
-  c_price INT,
-  c_phone VARCHAR(10)
-)
-LANGUAGE plpgsql AS
-$$
-DECLARE
-  phone_id INT;
-BEGIN
-  phone_id := addPhones(null, c_phone);
-  INSERT INTO clothes (name, city, color, price, phone) 
-  VALUES (c_name, c_city, c_color, c_price, phone_id)
-  RETURNING id INTO c_id;
-END
-$$;
+-- CREATE OR REPLACE PROCEDURE AddClothes (
+--   c_id INOUT INT,
+--   c_name VARCHAR(100),
+--   c_city VARCHAR(100),
+--   c_color VARCHAR(100),
+--   c_price INT,
+--   c_phone VARCHAR(10)
+-- )
+-- LANGUAGE plpgsql AS
+-- $$
+-- DECLARE
+--   phone_id INT;
+-- BEGIN
+--   phone_id := addPhones(null, c_phone);
+--   INSERT INTO clothes (name, city, color, price, phone) 
+--   VALUES (c_name, c_city, c_color, c_price, phone_id)
+--   RETURNING id INTO c_id;
+-- END
+-- $$;
 
 
 
