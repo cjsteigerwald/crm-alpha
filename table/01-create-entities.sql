@@ -2,50 +2,50 @@
 
 -- Locations --
 
--- DROP TABLE IF EXISTS countries;
+DROP TABLE IF EXISTS countries;
 
--- CREATE TABLE IF NOT EXISTS countries (
---   id INT PRIMARY KEY,
---   name CHAR(100) NOT NULL UNIQUE,
---   two_char_code CHAR(2) NOT NULL UNIQUE,
---   three_char_code CHAR(3) NOT NULL UNIQUE,
---   UNIQUE (three_char_code)
--- );
-
-
--- DROP TABLE IF EXISTS cities;
-
--- CREATE TABLE IF NOT EXISTS cities (
---   id SERIAL PRIMARY KEY,
---   name VARCHAR(200),
---   country_id INT REFERENCES countries(id)
--- );
-
--- DROP TABLE IF EXISTS us_states;
-
--- CREATE TABLE IF NOT EXISTS us_states (
---   id SERIAL PRIMARY KEY,
---   postal CHAR(2) NOT NULL UNIQUE,
---   name CHAR(128) NOT NULL UNIQUE,
---   UNIQUE (postal)
--- );
+CREATE TABLE IF NOT EXISTS countries (
+  id INT PRIMARY KEY,
+  name CHAR(100) NOT NULL UNIQUE,
+  two_char_code CHAR(2) NOT NULL UNIQUE,
+  three_char_code CHAR(3) NOT NULL UNIQUE,
+  UNIQUE (three_char_code)
+);
 
 
--- DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS cities;
 
--- CREATE TABLE IF NOT EXISTS locations (
---   id SERIAL PRIMARY KEY,
---   country_id INT REFERENCES countries(id) NOT NULL,
---   administrative_area INT REFERENCES us_states(id) NOT NULL, -- state
---   sub_administrative_area VARCHAR(100), -- county
---   locality INT REFERENCES cities(id) NOT NULL, -- city/town
---   dependent_locality VARCHAR(200), -- department
---   postal_code CHAR(10) NOT NULL,
---   thoroughfare VARCHAR(100) NOT NULL, -- street address
---   premise VARCHAR(50) DEFAULT '' NOT NULL, -- apartment, suite, box number, etc, PO Box
---   sub_premise VARCHAR(50),
---   UNIQUE (thoroughfare, postal_code, premise)
--- );
+CREATE TABLE IF NOT EXISTS cities (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200),
+  country_id INT REFERENCES countries(id)
+);
+
+DROP TABLE IF EXISTS us_states;
+
+CREATE TABLE IF NOT EXISTS us_states (
+  id SERIAL PRIMARY KEY,
+  postal CHAR(2) NOT NULL UNIQUE,
+  name CHAR(128) NOT NULL UNIQUE,
+  UNIQUE (postal)
+);
+
+
+DROP TABLE IF EXISTS locations;
+
+CREATE TABLE IF NOT EXISTS locations (
+  id SERIAL PRIMARY KEY,
+  country_id INT REFERENCES countries(id) NOT NULL,
+  administrative_area INT REFERENCES us_states(id) NOT NULL, -- state
+  sub_administrative_area VARCHAR(100), -- county
+  locality INT REFERENCES cities(id) NOT NULL, -- city/town
+  dependent_locality VARCHAR(200), -- department
+  postal_code CHAR(10) NOT NULL,
+  thoroughfare VARCHAR(100) NOT NULL, -- street address
+  premise VARCHAR(50) DEFAULT '' NOT NULL, -- apartment, suite, box number, etc, PO Box
+  sub_premise VARCHAR(50),
+  UNIQUE (thoroughfare, postal_code, premise)
+);
 
 -- -- phones --
 
@@ -61,15 +61,15 @@ CREATE TABLE IF NOT EXISTS phones (
 
 -- -- email --
 
--- DROP TABLE IF EXISTS emails;
+DROP TABLE IF EXISTS emails;
 
--- CREATE TABLE IF NOT EXISTS emails (
---   id SERIAL PRIMARY KEY,
---   username VARCHAR (300) NOT NULL,
---   domain_name VARCHAR (300) NOT NULL,
---   extension VARCHAR (300) NOT NULL,
---   UNIQUE (username, domain_name, extension)
--- );
+CREATE TABLE IF NOT EXISTS emails (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR (300) NOT NULL,
+  domain_name VARCHAR (300) NOT NULL,
+  extension VARCHAR (300) NOT NULL,
+  UNIQUE (username, domain_name, extension)
+);
 
 -- Persons --
 
