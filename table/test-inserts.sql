@@ -20,3 +20,6 @@
 
 -- SELECT delete_email(1);
 -- SELECT * FROM emails;
+
+SELECT get_country_id('United States');
+-- SELECT id FROM countries WHERE name = 'United States';
