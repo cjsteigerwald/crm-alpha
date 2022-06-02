@@ -32,40 +32,40 @@
 -- $$;
 
 
-CREATE OR REPLACE FUNCTION insert_city(
-  i_id INOUT INT,
-  i_city_name VARCHAR (300)
-)
-LANGUAGE plpgsql AS
-$$
-DECLARE
-  n_city VARCHAR(300);
-BEGIN
-n_city := initcap(i_city_name);
-  IF NOT EXISTS (SELECT n_city  
-    FROM cities 
-    WHERE 
-      n_city = name
-    ) THEN
-      WITH input_rows(name) AS (
-        VALUES (i_city_name)
-      ),
-      ins AS (
-        INSERT INTO cities (name)
-        SELECT * FROM input_rows
-        ON CONFLICT (name) DO NOTHING
-        RETURNING id into i_id      
-      )
-      SELECT id   
-      FROM ins
-      UNION ALL
-      SELECT c.id
-      FROM input_rows
-      JOIN cities c USING (name);
-  else
-    SELECT INTO i_id id FROM cities WHERE 
-      n_city = name;
-end if;
-END
-$$;
+-- CREATE OR REPLACE FUNCTION insert_city(
+--   i_id INOUT INT,
+--   i_city_name VARCHAR (300)
+-- )
+-- LANGUAGE plpgsql AS
+-- $$
+-- DECLARE
+--   n_city_name VARCHAR(300);
+-- BEGIN
+-- n_city_name := initcap(i_city_name);
+--   IF NOT EXISTS (SELECT n_city_name  
+--     FROM cities 
+--     WHERE 
+--       n_city_name = name
+--     ) THEN
+--       WITH input_rows(name) AS (
+--         VALUES (i_city_name)
+--       ),
+--       ins AS (
+--         INSERT INTO cities (name)
+--         SELECT * FROM input_rows
+--         ON CONFLICT (name) DO NOTHING
+--         RETURNING id into i_id      
+--       )
+--       SELECT id   
+--       FROM ins
+--       UNION ALL
+--       SELECT c.id
+--       FROM input_rows
+--       JOIN cities c USING (name);
+--   else
+--     SELECT INTO i_id id FROM cities WHERE 
+--       n_city_name = name;
+-- end if;
+-- END
+-- $$;
 
