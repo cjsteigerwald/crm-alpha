@@ -1,0 +1,15 @@
+-- drop function get_country_id_by_name;
+-- CREATE OR REPLACE FUNCTION get_country_id_by_name (
+--   name CHAR(100)
+-- )
+--   RETURNS INT
+--   LANGUAGE plpgsql SECURITY DEFINER AS
+--   $$
+--   DECLARE country_id INT;
+--   BEGIN
+--     SELECT countries.id INTO country_id
+--     FROM countries
+--     WHERE countries.name = get_country_id_by_name.name;
+--     RETURN country_id;
+--   END
+--   $$;

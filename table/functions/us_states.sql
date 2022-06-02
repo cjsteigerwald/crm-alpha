@@ -1,0 +1,15 @@
+-- drop function get_us_state_id;
+-- CREATE OR REPLACE FUNCTION get_us_state_id_by_name (
+--   name CHAR(100)
+-- )
+--   RETURNS INT
+--   LANGUAGE plpgsql SECURITY DEFINER AS
+--   $$
+--   DECLARE us_state_id INT;
+--   BEGIN
+--     SELECT us_states.id INTO us_state_id
+--     FROM us_states
+--     WHERE us_states.name = get_us_state_id_by_name.name;
+--     RETURN us_state_id;
+--   END
+--   $$;

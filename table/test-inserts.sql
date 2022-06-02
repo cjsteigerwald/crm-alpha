@@ -21,5 +21,14 @@
 -- SELECT delete_email(1);
 -- SELECT * FROM emails;
 
-SELECT get_country_id('United States');
+-- SELECT get_country_id_by_name('United States');
 -- SELECT id FROM countries WHERE name = 'United States';
+-- SELECT get_us_state_id_by_name('Nevada');
+-- Select * from us_states;
+
+-- INSERT INTO cities (name) VALUES ('cARSON cItY');
+-- SELECT insert_city(null, 'carson city');
+-- select * from cities;
+
+SELECT insert_department(null, 'BILLing');
+select * from departments;
