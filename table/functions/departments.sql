@@ -19,7 +19,7 @@
 
 
 -- CREATE OR REPLACE FUNCTION insert_department(
---   i_id INOUT INT,
+--   OUT return_id INT,
 --   i_department_name VARCHAR (300)
 -- )
 -- LANGUAGE plpgsql AS
@@ -40,7 +40,7 @@
 --         INSERT INTO departments (name)
 --         SELECT * FROM input_rows
 --         ON CONFLICT (name) DO NOTHING
---         RETURNING id into i_id      
+--         RETURNING id into return_id      
 --       )
 --       SELECT id   
 --       FROM ins
@@ -49,7 +49,7 @@
 --       FROM input_rows
 --       JOIN departments d USING (name);
 --   else
---     SELECT INTO i_id id FROM departments WHERE 
+--     SELECT INTO return_id id FROM departments WHERE 
 --       n_department_name = name;
 -- end if;
 -- END

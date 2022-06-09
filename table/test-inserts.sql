@@ -26,9 +26,20 @@
 -- SELECT get_us_state_id_by_name('Nevada');
 -- Select * from us_states;
 
--- INSERT INTO cities (name) VALUES ('cARSON cItY');
--- SELECT insert_city(null, 'carson city');
--- select * from cities;
 
-SELECT insert_department(null, 'BILLing');
-select * from departments;
+
+-- SELECT insert_department(null, 'testing');
+-- select * from departments;
+-- SELECT get_location_id('United States', 'Nevada', 'Reno', '89521', '9818 Sea Breeze Ln');
+-- SELECT get_location_id('United States', 'Nevada', 'Reno', '89502', '5067 S McCarran Blvd', '2');
+
+
+-- UPDATE test_table
+-- SET street_address = '1234 Main St'
+-- WHERE id = 1;
+
+
+-- SELECT update_location(13,'United States', 'Nevada', 'Reno', '89502', '5067 S McCarran Blvd', '2');
+
+-- SELECT * from test_table;
+

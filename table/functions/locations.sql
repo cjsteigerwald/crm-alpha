@@ -1,53 +1,211 @@
--- DROP FUNCTION insert_location;
+-- CREATE OR REPLACE FUNCTION insert_location(
+--   i_country_name VARCHAR (100),
+--   i_state_name CHAR(128),
+--   i_city_name VARCHAR(300),
+--   i_postal_code CHAR (10),
+--   i_street_address VARCHAR (100)
+-- )
+-- RETURNS INT
+-- AS
+-- $$
+-- BEGIN
+--   RETURN (SELECT insert_location(
+--     i_country_name,
+--     i_state_name,
+--     i_city_name,
+--     i_postal_code,
+--     i_street_address,
+--     ''
+--   ));
+-- END
+-- $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION insert_location(
-  i_id INOUT INT,
+
+-- CREATE OR REPLACE FUNCTION insert_location(
+--   OUT return_id INT,
+--   i_country_name VARCHAR (100),
+--   i_state_name CHAR(128),
+--   i_city_name VARCHAR(300),
+--   i_postal_code CHAR (10),
+--   i_street_address VARCHAR (100),
+--   i_address_line_2 VARCHAR (100)
+-- )
+-- LANGUAGE plpgsql AS
+-- $$
+-- DECLARE 
+-- i_country_id INT;
+-- i_state_id INT;
+-- i_city_id INT;
+
+-- BEGIN
+--   i_country_id := get_country_id_by_name(i_country_name);
+--   i_state_id := get_us_state_id_by_name(i_state_name);
+--   i_city_id := insert_city(i_city_name);
+--   IF NOT EXISTS (
+--     SELECT country_id, state_id, city_id, postal_code, street_address, address_line_2 
+--     FROM test_table 
+--     WHERE 
+--       country_id = i_country_id AND
+--       state_id = i_state_id AND
+--       city_id = i_city_id AND
+--       postal_code = i_postal_code AND
+--       street_address = i_street_address AND
+--       address_line_2 = i_address_line_2
+--     ) THEN
+--       WITH input_rows(
+--         country_id,
+--         state_id,
+--         city_id,
+--         postal_code,     
+--         street_address,
+--         address_line_2
+--       ) AS (
+--         VALUES (
+--           i_country_id,
+--           i_state_id,
+--           i_city_id,
+--           i_postal_code,
+--           i_street_address,
+--           i_address_line_2
+--           )
+--       ),
+--       ins AS (
+--         INSERT INTO test_table (country_id, state_id, city_id, postal_code, street_address, address_line_2)
+--         SELECT * FROM input_rows
+--         ON CONFLICT (country_id, state_id, city_id, postal_code, street_address, address_line_2) DO NOTHING
+--         RETURNING id into return_id      
+--       )
+--       SELECT id   
+--       FROM ins
+--       UNION ALL
+--       SELECT t.id
+--       FROM input_rows
+--       JOIN test_table t USING (country_id, state_id, city_id, postal_code, street_address, address_line_2);
+--   else
+--     SELECT INTO return_id id FROM test_table WHERE 
+--       country_id = i_country_id AND
+--       state_id = i_state_id AND
+--       city_id = i_city_id AND
+--       postal_code = i_postal_code AND
+--       street_address = i_street_address AND
+--       address_line_2 = i_address_line_2
+--       ;
+-- end if;
+-- END
+-- $$;
+
+-- CREATE OR REPLACE FUNCTION get_location_id(
+--   i_country_name VARCHAR (100),
+--   i_state_name CHAR(128),
+--   i_city_name VARCHAR(300),
+--   i_postal_code CHAR (10),
+--   i_street_address VARCHAR (100)
+-- )
+-- RETURNS INT
+-- AS
+-- $$
+-- BEGIN
+--   RETURN (SELECT get_location_id(
+--     i_country_name,
+--     i_state_name,
+--     i_city_name,
+--     i_postal_code,
+--     i_street_address,
+--     ''
+--   ));
+-- END
+-- $$ LANGUAGE plpgsql;
+
+-- CREATE OR REPLACE FUNCTION get_location_id(
+--   -- return_id INT,
+--   i_country_name VARCHAR (100),
+--   i_state_name CHAR(128),
+--   i_city_name VARCHAR(300),
+--   i_postal_code CHAR (10),
+--   i_street_address VARCHAR (100),
+--   i_address_line_2 VARCHAR (100)
+-- )
+-- RETURNS INT
+-- AS
+-- $$
+-- DECLARE 
+-- i_country_id INT := get_country_id_by_name(i_country_name);
+-- i_state_id INT := get_us_state_id_by_name(i_state_name);
+-- i_city_id INT := insert_city(i_city_name);
+-- BEGIN
+--   RETURN (
+--     SELECT 
+--       id
+--     FROM test_table
+--     WHERE
+--       country_id = i_country_id AND
+--       state_id = i_state_id AND
+--       city_id = i_city_id AND
+--       postal_code = i_postal_code AND
+--       street_address = i_street_address AND
+--       address_line_2 = i_address_line_2
+--   );
+-- END
+-- $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION update_location(
+  return_id INT,
   i_country_name VARCHAR (100),
   i_state_name CHAR(128),
-  i_county_name VARCHAR DEFAULT NULL,
   i_city_name VARCHAR(300),
-  i_department_name VARCHAR (300) DEFAULT NULL,
   i_postal_code CHAR (10),
-  i_street_address VARCHAR (100)
-  i_premise VARCHAR (50) DEFAULT '',
-  i_sub_premise_name VARCHAR (50) DEFAULT NULL
-LANGUAGE plpgsql AS
+  i_street_address VARCHAR (100),
+  i_address_line_2 VARCHAR (100)
+)
+RETURNS TABLE (
+  id INT,
+  country_name VARCHAR (100),
+  state_name CHAR(128),
+  city_name VARCHAR(300),
+  postal_code CHAR (10),
+  street_address VARCHAR (100),
+  address_line_2 VARCHAR (100)
+)
+AS
 $$
+DECLARE 
+i_country_id INT := get_country_id_by_name(i_country_name);
+i_state_id INT := get_us_state_id_by_name(i_state_name);
+i_city_id INT := insert_city(i_city_name);
 BEGIN
-  IF NOT EXISTS (SELECT i_street_address, i_postal_code, i_premise 
-    FROM locations 
-    WHERE 
-      i_street_address = thoroughfare AND
-      i_postal_code = postal_code AND
-      i_premise  = premise
-    ) THEN
-      WITH input_rows(
-        country_id,
-        administrative_area,
-        sub_administrative_area,
-        locality,
-        dependent_locality,
-        
-      ) AS (
-        VALUES (i_country_code, i_area_code, i_phone_number)
-      ),
-      ins AS (
-        INSERT INTO phones (country_code, area_code, phone_number)
-        SELECT * FROM input_rows
-        ON CONFLICT (country_code, area_code, phone_number) DO NOTHING
-        RETURNING id into i_id      
-      )
-      SELECT id   
-      FROM ins
-      UNION ALL
-      SELECT p.id
-      FROM input_rows
-      JOIN phones p USING (country_code, area_code, phone_number);
-  else
-    SELECT INTO i_id id FROM phones WHERE 
-      i_country_code = country_code AND
-      i_area_code = area_code AND
-      i_phone_number = phone_number;
-end if;
+  RETURN QUERY 
+    SELECT 
+      id, country_id, state_id, city_id, postal_code, street_address, address_line_2
+    FROM test_table
+    WHERE
+      country_id = i_country_id AND
+      state_id = i_state_id AND
+      city_id = i_city_id AND
+      postal_code = i_postal_code AND
+      street_address = i_street_address AND
+      address_line_2 = i_address_line_2;
 END
-$$;
+$$ LANGUAGE plpgsql;
+
+-- CREATE OR REPLACE FUNCTION modify_location(
+--   OUT return_id INT,
+--   i_country_name VARCHAR (100),
+--   i_state_name CHAR(128),
+--   i_city_name VARCHAR(300),
+--   i_postal_code CHAR (10),
+--   i_street_address VARCHAR (100)
+-- )
+-- AS
+-- $$
+-- BEGIN
+--   RETURN (SELECT modify_location(
+--     i_country_name,
+--     i_state_name,
+--     i_city_name,
+--     i_postal_code,
+--     i_street_address,
+--     ''
+--   ));
+-- END
+-- $$ LANGUAGE plpgsql;

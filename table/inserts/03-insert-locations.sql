@@ -1,0 +1,18 @@
+SELECT insert_location('United States', 'Washington', 'EVerett', '98208', 'Test Ave');
+SELECT insert_location('United States', 'Washington', 'EVerett', '98208', '123 Main St', '1');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89521', '10100 Toltect Ct');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89521', '9573 Steep Climb Ct');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89511', '6833 Oak Grass Ct');
+SELECT insert_location('United States', 'Washington', 'Vancouver', '98662', '8505 NW 4th Ave', '1');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89511', '655 Sierra Rose Dr');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89509', '6630 S McCarran Blvd', 'A 12');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89511', '71141 S Virgina St', 'A');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89511', '71141 S Virgina St', 'Ste A7');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89502', '5067 S McCarran Blvd', '2');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89523', '2005 Sierra Highlands Dr', '101');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89521', '9815 Dyevera Ln');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89521', '2005 Altair Ln');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89521', '9831 Dyevera Ln');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89521', '9835 Cardigan Bay Ln');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89521', '9820 Gainsborough Ln');
+SELECT insert_location('United States', 'Nevada', 'Reno', '89521', '9815 Sea Breeze Ln');
