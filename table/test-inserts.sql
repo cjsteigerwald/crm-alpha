@@ -1,4 +1,10 @@
 
+SELECT update_location(19, 'United States', 'Washington', 'jaKarta', '98208', '12345 Main Ave', '');
+
+select * from test_table;
+
+-- select * from cities;
+
 -- phones --
 -- SELECT insert_phone(null, '1', '525', '2104968');
 -- SELECT insert_phone(null, '1', '775', '7777777');
@@ -39,7 +45,8 @@
 -- WHERE id = 1;
 
 
--- SELECT update_location(13,'United States', 'Nevada', 'Reno', '89502', '5067 S McCarran Blvd', '2');
+
+
 
 -- SELECT * from test_table;
 

@@ -1,3 +1,79 @@
+DROP FUNCTION update_location;
+
+CREATE OR REPLACE FUNCTION update_location(
+  i_id INT,
+  i_country_name VARCHAR (100),
+  i_state_name CHAR(128),
+  i_city_name VARCHAR(300),
+  i_postal_code CHAR (10),
+  i_street_address VARCHAR (100),
+  i_address_line_2 VARCHAR (100)
+)
+RETURNS BOOLEAN
+AS
+$$
+DECLARE 
+i_country_id INT := get_country_id_by_name(i_country_name);
+i_state_id INT := get_us_state_id_by_name(i_state_name);
+i_city_id INT := insert_city(i_city_name);
+error JSON;
+BEGIN
+
+  -- IF EXISTS (SELECT tt.id FROM test_table AS tt WHERE tt.id = i_id) THEN
+    UPDATE test_table
+    SET 
+      country_id = COALESCE(i_country_id, country_id),
+      state_id = COALESCE(i_state_id, state_id),
+      city_id = COALESCE(i_city_id, city_id),
+      postal_code = COALESCE(i_postal_code, postal_code),
+      street_address = COALESCE(i_street_address, street_address),
+      address_line_2 = COALESCE(i_address_line_2, address_line_2)
+    WHERE id = i_id;
+    RETURN FOUND;
+ EXCEPTION
+    WHEN unique_violation THEN
+        RAISE NOTICE 'caught division_by_zero';
+        RETURN FALSE;
+  -- END IF;
+
+  -- RETURN QUERY SELECT to_json(a) FROM
+  --   (SELECT 
+  --     test_table.id,
+  --     test_table.country_id,
+  --     test_table.state_id, 
+  --     test_table.city_id, 
+  --     test_table.postal_code, 
+  --     test_table.street_address, 
+  --     test_table.address_line_2
+  --   FROM test_table
+  --   WHERE
+  --     test_table.id = i_id)a;
+END;
+$$ LANGUAGE plpgsql;
+
+-- CREATE OR REPLACE FUNCTION modify_location(
+--   OUT return_id INT,
+--   i_country_name VARCHAR (100),
+--   i_state_name CHAR(128),
+--   i_city_name VARCHAR(300),
+--   i_postal_code CHAR (10),
+--   i_street_address VARCHAR (100)
+-- )
+-- AS
+-- $$
+-- BEGIN
+--   RETURN (SELECT modify_location(
+--     i_country_name,
+--     i_state_name,
+--     i_city_name,
+--     i_postal_code,
+--     i_street_address,
+--     ''
+--   ));
+-- END
+-- $$ LANGUAGE plpgsql;
+
+
 -- CREATE OR REPLACE FUNCTION insert_location(
 --   i_country_name VARCHAR (100),
 --   i_state_name CHAR(128),
@@ -116,6 +192,7 @@
 -- END
 -- $$ LANGUAGE plpgsql;
 
+-- -- get_location returns id of location if exists, else -1
 -- CREATE OR REPLACE FUNCTION get_location_id(
 --   -- return_id INT,
 --   i_country_name VARCHAR (100),
@@ -149,63 +226,3 @@
 -- $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION update_location(
-  return_id INT,
-  i_country_name VARCHAR (100),
-  i_state_name CHAR(128),
-  i_city_name VARCHAR(300),
-  i_postal_code CHAR (10),
-  i_street_address VARCHAR (100),
-  i_address_line_2 VARCHAR (100)
-)
-RETURNS TABLE (
-  id INT,
-  country_name VARCHAR (100),
-  state_name CHAR(128),
-  city_name VARCHAR(300),
-  postal_code CHAR (10),
-  street_address VARCHAR (100),
-  address_line_2 VARCHAR (100)
-)
-AS
-$$
-DECLARE 
-i_country_id INT := get_country_id_by_name(i_country_name);
-i_state_id INT := get_us_state_id_by_name(i_state_name);
-i_city_id INT := insert_city(i_city_name);
-BEGIN
-  RETURN QUERY 
-    SELECT 
-      id, country_id, state_id, city_id, postal_code, street_address, address_line_2
-    FROM test_table
-    WHERE
-      country_id = i_country_id AND
-      state_id = i_state_id AND
-      city_id = i_city_id AND
-      postal_code = i_postal_code AND
-      street_address = i_street_address AND
-      address_line_2 = i_address_line_2;
-END
-$$ LANGUAGE plpgsql;
-
--- CREATE OR REPLACE FUNCTION modify_location(
---   OUT return_id INT,
---   i_country_name VARCHAR (100),
---   i_state_name CHAR(128),
---   i_city_name VARCHAR(300),
---   i_postal_code CHAR (10),
---   i_street_address VARCHAR (100)
--- )
--- AS
--- $$
--- BEGIN
---   RETURN (SELECT modify_location(
---     i_country_name,
---     i_state_name,
---     i_city_name,
---     i_postal_code,
---     i_street_address,
---     ''
---   ));
--- END
--- $$ LANGUAGE plpgsql;
