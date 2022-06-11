@@ -1,7 +1,7 @@
 -- DROP FUNCTION insertPhone;
 
 -- CREATE OR REPLACE FUNCTION insert_phone(
---   i_id INOUT INT,
+--   i_id OUT INT,
 --   i_country_code CHAR(1),
 --   i_area_code CHAR(3),
 --   i_phone_number CHAR(7)
@@ -58,6 +58,10 @@
 --     phone_number = COALESCE(update_phone.phone_number, phones.phone_number)
 --   WHERE phones.id = update_phone.id;
 --   RETURN FOUND;
+--   EXCEPTION
+--     WHEN unique_violation THEN
+--         -- RAISE NOTICE 'Unique violation';
+--         RETURN FALSE;
 -- END
 -- $$;
 

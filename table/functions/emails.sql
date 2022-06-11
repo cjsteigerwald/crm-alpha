@@ -1,7 +1,28 @@
--- DROP FUNCTION insertEmail;
+-- DROP FUNCTION insert_email;
+
+-- get_email_id returns email id if found, else NULL
+-- CREATE OR REPLACE FUNCTION get_email_id(
+--   i_username VARCHAR (300) DEFAULT NULL,
+--   i_domain_name VARCHAR (300) DEFAULT NULL,
+--   i_extension VARCHAR (300) DEFAULT NULL
+-- ) RETURNS INT
+-- LANGUAGE plpgsql SECURITY DEFINER AS
+-- $$
+-- BEGIN
+--   RETURN (SELECT id    
+--     FROM emails
+--     WHERE 
+--       username = i_username AND
+--       domain_name = i_domain_name AND
+--       extension = i_extension
+--   );
+-- END
+-- $$;
+
+
 
 -- CREATE OR REPLACE FUNCTION insert_email(
---   i_id INOUT INT,
+--   i_id OUT INT,
 --   i_username VARCHAR (300),
 --   i_domain_name VARCHAR (300),
 --   i_extension VARCHAR (300)

@@ -1,18 +1,32 @@
 
-SELECT update_location(19, 'United States', 'Washington', 'jaKarta', '98208', '12345 Main Ave', '');
+SELECT insert_person ('Chris', '', 'Steigerwald', '', 'male');
+-- SELECT insert_person ('Chris', 'Joseph', 'Steigerwald', '');
+-- SELECT insert_person ('Christine','Marie', 'Steigerwald', '', 'female');
+-- SELECT insert_person ('Lola','Elaine', 'Steigerwald', '');
+-- SELECT insert_person ('Jade','Elaine', 'Steigerwald', '', 'female');
+-- SELECT insert_person ('Michael','Derby', 'Test', 'Jr', 'male');
 
-select * from test_table;
+SELECT * FROM persons;
+
+-- SELECT get_email_id('cjsteigerwald', 'gmail', 'com');
+-- SELECT * FROM emails;
+
+-- SELECT update_location(19, 'United States', 'Washington', 'jaKarta', '98208', '12345 Main Ave');
+-- SELECT update_location(19, 'United States', 'Washington', 'jaKarta', '98208', '12345 Main Ave', '');
+-- SELECT delete_location(19);
+
+-- select * from test_table;
 
 -- select * from cities;
 
 -- phones --
 -- SELECT insert_phone(null, '1', '525', '2104968');
 -- SELECT insert_phone(null, '1', '775', '7777777');
--- SELECT insert_phone(null, '1', '425', '2104971');
+-- SELECT insert_phone(null, '1', '425', '2104968');
 -- SELECT updatePhone(1, '1', NULL, '5555555' );
--- SELECT update_phone(1, '1', '425', '2104968' );
+-- SELECT update_phone(8, '1', '234', '5678911' );
 
--- SELECT delete_phone(15);
+-- SELECT delete_phone(8);
 
 -- select * from phones;
 
