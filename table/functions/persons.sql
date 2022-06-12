@@ -1,5 +1,20 @@
 -- DROP FUNCTION insert_person;
 
+-- Trigger BEFORE INSERT to normalize data --
+CREATE OR REPLACE FUNCTION capitalize_person_names()
+  RETURNS TRIGGER AS $process_city$
+  BEGIN
+    NEW.first_name := INITCAP(NEW.first_name);
+    NEW.middle_name := INITCAP(NEW.middle_name);
+    NEW.last_name := INITCAP(NEW.last_name);
+    RETURN NEW;
+  END;
+  $process_city$ LANGUAGE plpgsql;
+
+  CREATE OR REPLACE TRIGGER process_person_name
+    BEFORE INSERT OR UPDATE OF first_name, middle_name, last_name
+    ON persons
+    FOR EACH ROW EXECUTE FUNCTION capitalize_person_names();
 
 
 
