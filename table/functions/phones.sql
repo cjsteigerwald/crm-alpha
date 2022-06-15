@@ -1,4 +1,13 @@
--- DROP FUNCTION insertPhone;
+-- DROP FUNCTION is_phone_id_valid;
+
+-- CREATE OR REPLACE FUNCTION is_phone_id_valid(i_id INT)
+--   RETURNS BOOLEAN
+--   LANGUAGE plpgsql SECURITY DEFINER AS
+--   $$
+--   BEGIN
+--     RETURN EXISTS (SELECT * FROM phones WHERE id = i_id);
+--   END
+--   $$;
 
 -- CREATE OR REPLACE FUNCTION insert_phone(
 --   i_id OUT INT,

@@ -1,5 +1,13 @@
-SELECT insert_phone(null, '1', '525', '2104968');
-SELECT insert_phone(null, '1', '775', '2506698');
-SELECT insert_phone(null, '1', '425', '2108858');
-SELECT insert_phone(null, '1', '702', '4455666');
-SELECT insert_phone(null, '1', '234', '5678910');
+SELECT insert_phone('1', '525', '2104968');
+SELECT insert_phone('1', '775', '2506698');
+SELECT insert_phone('1', '425', '2108858');
+SELECT insert_phone('1', '702', '4455666');
+SELECT insert_phone('1', '425', '1111111');
+SELECT insert_phone('1', '234', '2222222');
+SELECT insert_phone('1', '234', '3333333');
+SELECT insert_phone('1', '234', '4444444');
+SELECT insert_phone('1', '234', '5555555');
+SELECT insert_phone('1', '234', '6666666');
+SELECT insert_phone('1', '234', '7777777');
+SELECT insert_phone('1', '234', '8888888');
+SELECT insert_phone('1', '234', '9999999');
