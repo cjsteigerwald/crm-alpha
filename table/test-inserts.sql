@@ -1,3 +1,7 @@
+SELECT insert_person_personal_email(1,2);
+SELECT * FROM person_personal_email;
+-- SELECT * FROM emails WHERE id = 1;
+-- SELECT * FROM emails;
 
 -- SELECT insert_person ('Chris', '', 'Steigerwald', '', 'male');
 -- SELECT insert_person ('Chris', 'Joseph', 'Steigerwald', '');
@@ -13,9 +17,9 @@
 
 -- SELECT update_person(10, 'Tetter', 'Test', 'Test', '', 'female');
 -- -- SELECT delete_person(9);
--- SELECT delete_person_home_phone (6);
--- SELECT update_person_home_phone(1, '1', '425', '2104968');
--- select * from person_home_phone;
+-- SELECT delete_person_professional_phone (6);
+-- SELECT update_person_professional_phone(1, '1', '425', '2104968');
+-- select * from person_professional_phone;
 -- SELECT * FROM phones;
 
 -- SELECT * FROM persons;
