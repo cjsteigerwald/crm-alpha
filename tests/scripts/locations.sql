@@ -19,7 +19,7 @@
 -- #####################################
 BEGIN;
 
-SELECT plan(15);
+SELECT plan(18);
 SELECT has_table('locations');
 SELECT col_not_null('locations', 'id');
 SELECT col_not_null('locations', 'country_id');
@@ -66,6 +66,29 @@ SELECT has_function('get_location_id', ARRAY [
   'VARCHAR',
   'VARCHAR'
 ], 'get_location_id exists');
+
+SELECT has_function('update_location', ARRAY [
+  'INT',
+  'VARCHAR',
+  'CHAR',
+  'VARCHAR',
+  'CHAR',
+  'VARCHAR',
+  'VARCHAR'
+], 'update_location exists');
+
+SELECT has_function('update_location', ARRAY [
+  'INT',
+  'VARCHAR',
+  'CHAR',
+  'VARCHAR',
+  'CHAR',
+  'VARCHAR'
+], 'update_location exists');
+
+SELECT has_function('delete_location', ARRAY [
+  'INT'
+], 'delete_location exists');
 
 SELECT * FROM finish();
 ROLLBACK
