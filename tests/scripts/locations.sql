@@ -19,7 +19,7 @@
 -- #####################################
 BEGIN;
 
-SELECT plan(18);
+SELECT plan(22);
 SELECT has_table('locations');
 SELECT col_not_null('locations', 'id');
 SELECT col_not_null('locations', 'country_id');
@@ -41,53 +41,90 @@ SELECT col_is_unique('locations', ARRAY['country_id', 'state_id', 'city_id', 'po
 -- #####################################
 -- 2. FUNCTION TEST
 -- #####################################
+
+-- insert_location
 SELECT has_function('insert_location', ARRAY [
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR',
-  'VARCHAR'
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying',
+  'character varying'
 ], 'insert_location exists');
 
+SELECT function_returns('insert_location', ARRAY [
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying',
+  'character varying'
+], 'integer', 'insert_location returns integer');
+
+SELECT function_lang_is('insert_location', ARRAY [
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying',
+  'character varying'
+], 'plpgsql', 'insert_location is plpgsql');
+
 SELECT has_function('insert_location', ARRAY [
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR'
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying'
 ], 'insert_location exists');
 
+SELECT function_returns('insert_location', ARRAY [
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying'
+], 'integer', 'insert_location returns integer');
+
+SELECT function_lang_is('insert_location', ARRAY [
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying'
+], 'plpgsql', 'insert_location is plpgsql');
+
+-- get_location_id
 SELECT has_function('get_location_id', ARRAY [
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR',
-  'VARCHAR'
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying',
+  'character varying'
 ], 'get_location_id exists');
 
 SELECT has_function('update_location', ARRAY [
-  'INT',
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR',
-  'VARCHAR'
+  'integer',
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying',
+  'character varying'
 ], 'update_location exists');
 
 SELECT has_function('update_location', ARRAY [
-  'INT',
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR',
-  'CHAR',
-  'VARCHAR'
+  'integer',
+  'character varying',
+  'character',
+  'character varying',
+  'character',
+  'character varying'
 ], 'update_location exists');
 
 SELECT has_function('delete_location', ARRAY [
-  'INT'
+  'integer'
 ], 'delete_location exists');
 
 SELECT * FROM finish();
