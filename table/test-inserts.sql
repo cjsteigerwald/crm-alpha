@@ -1,4 +1,8 @@
-SELECT insert_person_personal_email(1,2);
+
+SELECT get_person_id_by_email_id(2);
+-- SELECT insert_person_personal_email(1,2);
+-- SELECT insert_person_personal_email(1,3);
+-- SELECT get_personal_email_by_person_id(1);
 SELECT * FROM person_personal_email;
 -- SELECT * FROM emails WHERE id = 1;
 -- SELECT * FROM emails;
