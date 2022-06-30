@@ -1,9 +1,14 @@
+SELECT update_location(1,'United States', 'Washington', 'EVerett', '98208', 'Test Ave');
 
-SELECT get_person_id_by_email_id(2);
+-- SELECT insert_location('United States', 'Nevada', 'Reno', '89521');
+
+-- select * from locations;
+-- select nextval(pg_get_serial_sequence('test_table', 'id')) as new_id;
+-- SELECT get_person_id_by_email_id(2);
 -- SELECT insert_person_personal_email(1,2);
 -- SELECT insert_person_personal_email(1,3);
 -- SELECT get_personal_email_by_person_id(1);
-SELECT * FROM person_personal_email;
+-- SELECT * FROM person_personal_email;
 -- SELECT * FROM emails WHERE id = 1;
 -- SELECT * FROM emails;
 

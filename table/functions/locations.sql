@@ -8,7 +8,7 @@
 -- AS
 -- $$
 -- BEGIN
---   DELETE FROM test_table
+--   DELETE FROM locations
 --     WHERE id = i_id;
 --     RETURN FOUND;
 --     EXCEPTION
@@ -17,6 +17,8 @@
 --             RETURN FALSE;
 -- END;
 -- $$ LANGUAGE plpgsql;
+
+-- DROP FUNCTION update_location(INT, VARCHAR, CHAR, VARCHAR, CHAR, VARCHAR);
 
 -- CREATE OR REPLACE FUNCTION update_location(
 --   i_id INT,
@@ -42,6 +44,7 @@
 -- END;
 -- $$ LANGUAGE plpgsql;
 
+
 -- -- update_location returns true if success other false
 -- CREATE OR REPLACE FUNCTION update_location(
 --   i_id INT,
@@ -62,8 +65,8 @@
 -- error JSON;
 -- BEGIN
 
---   -- IF EXISTS (SELECT tt.id FROM test_table AS tt WHERE tt.id = i_id) THEN
---     UPDATE test_table
+--   -- IF EXISTS (SELECT tt.id FROM locations AS tt WHERE tt.id = i_id) THEN
+--     UPDATE locations
 --     SET 
 --       country_id = COALESCE(i_country_id, country_id),
 --       state_id = COALESCE(i_state_id, state_id),
@@ -79,6 +82,9 @@
 --             RETURN FALSE;
 -- END;
 -- $$ LANGUAGE plpgsql;
+
+-- DROP FUNCTION insert_location(INT, VARCHAR, CHAR);
+
 
 -- CREATE OR REPLACE FUNCTION insert_location(
 --   i_country_name VARCHAR (100),
@@ -125,7 +131,7 @@
 --   i_city_id := insert_city(i_city_name);
 --   IF NOT EXISTS (
 --     SELECT country_id, state_id, city_id, postal_code, street_address, address_line_2 
---     FROM test_table 
+--     FROM locations 
 --     WHERE 
 --       country_id = i_country_id AND
 --       state_id = i_state_id AND
@@ -152,7 +158,7 @@
 --           )
 --       ),
 --       ins AS (
---         INSERT INTO test_table (country_id, state_id, city_id, postal_code, street_address, address_line_2)
+--         INSERT INTO locations (country_id, state_id, city_id, postal_code, street_address, address_line_2)
 --         SELECT * FROM input_rows
 --         ON CONFLICT (country_id, state_id, city_id, postal_code, street_address, address_line_2) DO NOTHING
 --         RETURNING id into return_id      
@@ -162,9 +168,9 @@
 --       UNION ALL
 --       SELECT t.id
 --       FROM input_rows
---       JOIN test_table t USING (country_id, state_id, city_id, postal_code, street_address, address_line_2);
+--       JOIN locations t USING (country_id, state_id, city_id, postal_code, street_address, address_line_2);
 --   else
---     SELECT INTO return_id id FROM test_table WHERE 
+--     SELECT INTO return_id id FROM locations WHERE 
 --       country_id = i_country_id AND
 --       state_id = i_state_id AND
 --       city_id = i_city_id AND
@@ -175,6 +181,9 @@
 -- end if;
 -- END
 -- $$;
+
+-- DROP FUNCTION get_location_id(VARCHAR, CHAR, VARCHAR, CHAR, VARCHAR, VARCHAR);
+
 
 -- CREATE OR REPLACE FUNCTION get_location_id(
 --   i_country_name VARCHAR (100),
@@ -219,7 +228,7 @@
 --   RETURN (
 --     SELECT 
 --       id
---     FROM test_table
+--     FROM locations
 --     WHERE
 --       country_id = i_country_id AND
 --       state_id = i_state_id AND
