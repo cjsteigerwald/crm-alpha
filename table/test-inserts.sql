@@ -1,4 +1,4 @@
-SELECT update_location(1,'United States', 'Washington', 'EVerett', '98208', 'Test Ave');
+SELECT * FROM cities;
 
 -- SELECT insert_location('United States', 'Nevada', 'Reno', '89521');
 

@@ -1,3 +1,7 @@
+-- #####################################
+-- LOCATIONS
+-- #####################################
+
 -- Documentation for PGTap can be found:
 -- https://pgtap.org/documentation.html
 -- CREATE EXTENSION IF NOT EXISTS pgtap;
@@ -71,7 +75,7 @@ SELECT has_function('insert_location', ARRAY [
   'character varying'
 ], 'insert_location exists');
 
--- 14. verify function returns integer
+-- Test 14. verify function returns integer
 SELECT function_returns('insert_location', ARRAY [
   'character varying',
   'character',
