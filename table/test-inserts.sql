@@ -1,4 +1,4 @@
-SELECT * FROM cities;
+SELECT * FROM phones;
 
 -- SELECT insert_location('United States', 'Nevada', 'Reno', '89521');
 

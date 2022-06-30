@@ -69,5 +69,6 @@ SELECT is(
 WHERE
   name = :city_name;
 
+
 SELECT * FROM finish();
 ROLLBACK
