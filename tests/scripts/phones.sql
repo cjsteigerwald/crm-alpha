@@ -11,7 +11,7 @@
 \set QUIET 1
 
 
--- Format the output for nice TAP.
+Format the output for nice TAP.
 \pset format unaligned
 \pset tuples_only true
 \pset pager off
